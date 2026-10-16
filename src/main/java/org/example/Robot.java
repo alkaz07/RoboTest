@@ -1,6 +1,9 @@
 package org.example;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Robot {
     Direction d;
@@ -55,10 +58,10 @@ public class Robot {
 
     public void stepForward(){
         switch (d){
-            case UP -> pos.y++;
-            case RIGHT -> pos.x++;
-            case DOWN -> pos.y--;
-            case LEFT -> pos.x--;
+            case UP -> pos = new Position(pos.x, pos.y+1);
+            case RIGHT -> pos = new Position(pos.x+1, pos.y);
+            case DOWN -> pos = new Position(pos.x, pos.y-1);
+            case LEFT -> pos = new Position(pos.x-1, pos.y);
         }
     }
 
@@ -75,4 +78,27 @@ public class Robot {
             doCmd(c);
         }
     }
+
+    public int calcStepsUntilOldPos(String proga){
+//        Set<Position> memory = new HashSet<>();
+        Set<Position> memory = new LinkedHashSet<>();
+        memory.add(pos);
+        for (char c : proga.toCharArray()){
+            doCmd(c);
+            if (c == 'S'){
+                if (memory.contains(pos)){
+                    System.out.println("-- Memory: ---");
+                    memory.forEach(IO::println);
+                    return memory.size();   //останавливаемся и рассказываем, сколько всего точек посетили
+                }
+                else{
+                    memory.add(pos);
+                }
+            }
+        }
+        System.out.println("-- Memory: ---");
+        memory.forEach(IO::println);
+        return -1;
+    }
+
 }

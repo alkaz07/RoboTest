@@ -106,4 +106,17 @@ public class TestRobot {
         Robot expected = new Robot(expD, expX, expY);
         Assertions.assertEquals(expected, robot);
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "SSLSLSLSSRSRS, 5",
+            "LSSSS, -1",
+            "SSRSSRSSRSSS, 8"
+    })
+    public void testZadacha(String proga, int resultExpected){
+        Robot robot = new Robot(Direction.UP, 0, 0);
+        int res = robot.calcStepsUntilOldPos(proga);
+        Assertions.assertEquals(resultExpected, res);
+        System.out.println("proga = " + proga + " res = "+res+" robot = "+robot);
+    }
 }
