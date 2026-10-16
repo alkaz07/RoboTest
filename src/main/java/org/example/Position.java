@@ -28,4 +28,17 @@ public class Position {
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
+    public Position shiftUp(){
+        return new Position(x, y+1);
+    }
+    public Position shiftDown(){
+        return new Position(x, y-1);
+    }
+    public Position shiftLeft(){
+        return new Position(x-1, y);
+    }
+    public Position shiftRight(){
+        return new Position(x+1, y);
+    }
 }

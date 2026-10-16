@@ -58,10 +58,10 @@ public class Robot {
 
     public void stepForward(){
         switch (d){
-            case UP -> pos = new Position(pos.x, pos.y+1);
-            case RIGHT -> pos = new Position(pos.x+1, pos.y);
-            case DOWN -> pos = new Position(pos.x, pos.y-1);
-            case LEFT -> pos = new Position(pos.x-1, pos.y);
+            case UP -> pos = pos.shiftUp();
+            case RIGHT -> pos = pos.shiftRight();
+            case DOWN -> pos = pos.shiftDown();
+            case LEFT -> pos = pos.shiftLeft();
         }
     }
 
